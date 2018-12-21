@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
+
+    <title>Chorainaki.com</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/framework.min.css' %}">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills float-right">
+            <li class="nav-item">
+              {% url 'home-page' as url_check %}
+              {% if request.path == url_check %}
+                <a class="nav-link active" href="{% url 'home-page' %}">Home<span class="sr-only">(current)</span></a>
+              {% else %}
+                <a class="nav-link" href="{% url 'home-page' %}">Home</a>
+              {% endif %}
+            </li>
+            <li class="nav-item">
+              {% url 'contact-page' as url_check %}
+              {% if request.path == url_check %}
+                <a class="nav-link active" href="{% url 'contact-page' %}">Contact<span class="sr-only">(current)</span></a>
+              {% else %}
+                <a class="nav-link" href="{% url 'contact-page' %}">Contact</a>
+              {% endif %}
+            </li>
+            <li class="nav-item">
+              {% url 'login-page' as url_check %}
+              {% if request.path == url_check %}
+                <a class="nav-link active" href="{% url 'login-page' %}">Login<span class="sr-only">(current)</span></a>
+              {% else %}
+                <a class="nav-link" href="{% url 'login-page' %}">Login</a>
+              {% endif %}
+            </li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Chorainaki.com</h3>
+      </div>
+
+      {% block body_block %}
+
+
+
+
+      {% endblock %}
+
+
+      <footer class="footer">
+        <p>&copy; 2019. A social wellbeing project by Skooby-Technology for Impact</p>
+      </footer>
+
+    </div> <!-- /container -->
+  </body>
+</html>
