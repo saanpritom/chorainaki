@@ -12,13 +12,12 @@
           <hr/>
           <form>
             <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              <label for="InputEmail">Email address</label>
+              <input type="email" class="form-control" id="InputEmail" placeholder="Enter email">
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              <label for="InputPassword">Password</label>
+              <input type="password" class="form-control" id="InputPassword" placeholder="Password">
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
           </form>
@@ -26,8 +25,8 @@
       </div>
       <div class="row marketing">
         <div class="col-lg-12">
-          <p>Forgot your password? <a href="#">Account Recovery</a></p>
-          <p>Don't have an account then please <a href="#">Sign Up</a> for an account</p>
+          <p>Forgot your password? <a href="{% url 'forget-password-page' %}">Account Recovery</a></p>
+          <p>Don't have an account then please <a href="{% url 'signup-page' %}">Sign Up</a> for an account</p>
         </div>
       </div>
 

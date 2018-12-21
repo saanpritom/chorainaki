@@ -77,3 +77,13 @@ body {
     border-bottom: 0;
   }
 }
+
+/* my custom codes */
+.imei-search-form{
+  padding-top: 30px;
+}
+
+.jumbotron .profile-edit-button{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
