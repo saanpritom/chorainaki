@@ -79,6 +79,18 @@ body {
 }
 
 /* my custom codes */
+.navbar{
+  padding-left: 0px;
+}
+
+.navbar-brand{
+  font-size: 2.25rem;
+}
+
+.search-form-heading{
+  text-align: left;
+}
+
 .imei-search-form{
   padding-top: 30px;
 }
