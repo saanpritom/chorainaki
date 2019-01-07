@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views import generic
 
 # Create your views here.
 def home_page_view(request):
@@ -7,14 +9,6 @@ def home_page_view(request):
 
 def contact_page_view(request):
     return render(request, 'contact-page-view.html')
-
-
-def login_page_view(request):
-    return render(request, 'login-page-view.html')
-
-
-def signup_page_view(request):
-    return render(request, 'signup-page-view.html')
 
 
 def forget_password_page_view(request):

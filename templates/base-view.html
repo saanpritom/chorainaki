@@ -25,7 +25,7 @@
       <div class="header clearfix">
 
 
-        <nav class="navbar navbar-toggleable-md">
+        <nav class="navbar navbar-toggleable-md navbar-light bg-light">
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#mainNavbars" aria-controls="mainNavbars" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -55,16 +55,36 @@
                     </li>
                 {% endif %}
 
-                {% url 'login-page' as url_check %}
-                {% if request.path == url_check %}
-                  <li class="nav-item active">
-                    <a class="nav-link active" href="{% url 'login-page' %}">Login<span class="sr-only">(current)</span></a>
-                  </li>
+
+                {% if user.is_authenticated %}
+
+                  {% url 'profile-page' as url_check %}
+                  {% if request.path == url_check %}
+                    <li class="nav-item active">
+                      <a class="nav-link active" href="{% url 'profile-page' %}">Hi, {{ user.full_name }} <span class="sr-only">(current)</span></a>
+                    </li>
+                  {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'profile-page' %}">Hi, {{ user.full_name }} </a>
+                    </li>
+                  {% endif %}
+
                 {% else %}
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login-page' %}">Login</a>
-                  </li>
+                  {% url 'login-page' as url_check %}
+                  {% if request.path == url_check %}
+                    <li class="nav-item active">
+                      <a class="nav-link active" href="{% url 'login-page' %}">Login<span class="sr-only">(current)</span></a>
+                    </li>
+                  {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'login-page' %}">Login</a>
+                    </li>
+                  {% endif %}
+
+
                 {% endif %}
+
+
 
             </ul>
           </div>

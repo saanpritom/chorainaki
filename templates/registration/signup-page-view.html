@@ -1,0 +1,107 @@
+{% extends "base-view.html" %}
+
+{% load staticfiles %}
+
+{% block body_block %}
+
+
+
+      <div class="row marketing">
+        <div class="col-lg-12">
+          <h4>Sign Up for a new account</h4>
+          <hr/>
+
+          <form method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+              <label for="{{ form.full_name.id_full_name }}">Your name</label>
+              {{ form.full_name }}
+
+              {% if form.full_name.errors %}
+
+              <div class="alert alert-danger" role="alert">
+
+                 <strong>Sorry!</strong> {{ form.full_name.errors }}
+
+              </div>
+
+              {% endif %}
+
+
+            </div>
+            <div class="form-group">
+              <label for="InputEmail">Email address</label>
+              {{ form.username }}
+
+              {% if form.username.errors %}
+
+              <div class="alert alert-danger" role="alert">
+                <strong>Sorry!</strong> {{ form.username.errors }}
+              </div>
+
+              {% endif %}
+
+
+            </div>
+            <div class="form-group">
+              <label for="InputMobileNumber">Your mobile number</label>
+              {{ form.mobile_number }}
+
+              {% if form.mobile_number.errors %}
+
+              <div class="alert alert-danger" role="alert">
+                <strong>Sorry!</strong> {{ form.mobile_number.errors }}
+              </div>
+
+              {% endif %}
+
+
+            </div>
+            <div class="form-group">
+              <label for="InputAddress">Your address</label>
+              {{ form.address }}
+
+              {% if form.address.errors %}
+
+              <div class="alert alert-danger" role="alert">
+                <strong>Sorry!</strong> {{ form.address.errors }}
+              </div>
+
+              {% endif %}
+
+            </div>
+            <div class="form-group">
+              <label for="InputPassword">Password</label>
+              {{ form.password1 }}
+
+
+              {% if form.password1.errors %}
+
+              <div class="alert alert-danger" role="alert">
+                <strong>Sorry!</strong> {{ form.password1.errors }}
+              </div>
+
+              {% endif %}
+            </div>
+            <div class="form-group">
+              <label for="InputConfirmPassword">Confirm password</label>
+              {{ form.password2 }}
+
+              {% if form.password2.errors %}
+
+              <div class="alert alert-danger" role="alert">
+                <strong>Sorry!</strong> {{ form.password2.errors }}
+              </div>
+
+              {% endif %}
+
+              
+            </div>
+            <input type="submit" class="btn btn-primary" value="SignUp">
+          </form>
+
+        </div>
+      </div>
+
+{% endblock %}
