@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'devicefinder',
     'users.apps.UsersConfig',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -81,8 +85,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'chorainaki',
-        'USER': 'mysqluser',
-        'PASSWORD': 'superacces123',
+        'USER': 'dbuser',
+        'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': '3306',
     }

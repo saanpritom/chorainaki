@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('devicefinder.urls'), name='devicefinder_app'),
     path('users/', include('users.urls')),
     path('users/', include('django.contrib.auth.urls')),
+    path('api/v1/', include('api.urls')),
 ]
