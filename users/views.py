@@ -37,18 +37,18 @@ class SignUpView(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             # <process form cleaned data>
-            response = requests.post("http://127.0.0.1:8000/api/v1/users/create/", data=request.POST)
-            #return HttpResponseRedirect('/success/')
+            data = {"full_name": request.POST['full_name'],
+                    "username": request.POST['username'],
+                    "mobile_number": request.POST['mobile_number'],
+                    "address": request.POST['address'],
+                    "password": request.POST['password1']}
+            url = 'http://127.0.0.1:8000/api/v1/users/create/'
+            response = requests.post(url, verify=False, json=data)
             if response.status_code == 201:
                 return HttpResponse('Yay, it worked')
             return HttpResponse('Could not save data')
 
         return render(request, self.template_name, {'form': form})
-
-
-
-#def SignUpView(request):
-#    return render(request, 'userwebsite/registration/signup-page-view.html')
 
 
 class UserListView(generics.ListCreateAPIView):

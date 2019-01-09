@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 07, 2019 at 02:43 PM
+-- Generation Time: Jan 09, 2019 at 11:15 AM
 -- Server version: 5.7.24-0ubuntu0.18.04.1
 -- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
@@ -19,6 +19,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `chorainaki`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `authtoken_token`
+--
+
+DROP TABLE IF EXISTS `authtoken_token`;
+CREATE TABLE `authtoken_token` (
+  `key` varchar(40) NOT NULL,
+  `created` datetime(6) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `authtoken_token`
+--
+
+INSERT INTO `authtoken_token` (`key`, `created`, `user_id`) VALUES
+('6940f4cd85945a1787b6f37a233c94f8f14ef2e1', '2019-01-08 07:14:44.049423', 5);
 
 -- --------------------------------------------------------
 
@@ -87,7 +107,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (21, 'Can add custom user', 6, 'add_customuser'),
 (22, 'Can change custom user', 6, 'change_customuser'),
 (23, 'Can delete custom user', 6, 'delete_customuser'),
-(24, 'Can view custom user', 6, 'view_customuser');
+(24, 'Can view custom user', 6, 'view_customuser'),
+(25, 'Can add Token', 7, 'add_token'),
+(26, 'Can change Token', 7, 'change_token'),
+(27, 'Can delete Token', 7, 'delete_token'),
+(28, 'Can view Token', 7, 'view_token');
 
 -- --------------------------------------------------------
 
@@ -137,6 +161,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (1, 'admin', 'logentry'),
 (3, 'auth', 'group'),
 (2, 'auth', 'permission'),
+(7, 'authtoken', 'token'),
 (4, 'contenttypes', 'contenttype'),
 (5, 'sessions', 'session'),
 (6, 'users', 'customuser');
@@ -175,7 +200,9 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (13, 'admin', '0001_initial', '2019-01-07 13:20:27.560190'),
 (14, 'admin', '0002_logentry_remove_auto_add', '2019-01-07 13:20:27.613470'),
 (15, 'admin', '0003_logentry_add_action_flag_choices', '2019-01-07 13:20:27.668458'),
-(16, 'sessions', '0001_initial', '2019-01-07 13:20:28.311619');
+(16, 'sessions', '0001_initial', '2019-01-07 13:20:28.311619'),
+(17, 'authtoken', '0001_initial', '2019-01-08 07:04:14.780047'),
+(18, 'authtoken', '0002_auto_20160226_1747', '2019-01-08 07:04:14.851006');
 
 -- --------------------------------------------------------
 
@@ -189,6 +216,13 @@ CREATE TABLE `django_session` (
   `session_data` longtext NOT NULL,
   `expire_date` datetime(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `django_session`
+--
+
+INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('dkg1l3ikh95rhfk9181sujq6kfhcc584', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-22 07:14:44.102230');
 
 -- --------------------------------------------------------
 
@@ -220,7 +254,17 @@ CREATE TABLE `users_customuser` (
 
 INSERT INTO `users_customuser` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`, `full_name`, `mobile_number`, `address`) VALUES
 (1, 'pbkdf2_sha256$120000$zHGDIwu1f7ly$nMRhNLBQs1Q/avzuYDN5d+2lWOQlegCXHFLyHpqOj6g=', '2019-01-07 14:23:45.723401', 1, 'root', '', '', 'root@idopia.co', 1, 1, '2019-01-07 13:34:13.516999', '', '', ''),
-(5, 'pbkdf2_sha256$120000$uqkOQLVSzjJM$M3BVFrNhSwAjvj6xY0yHi88YZTWi/OGHnTiqBRq2lj0=', NULL, 0, 'john.snow@gmail.com', '', '', '', 0, 1, '2019-01-07 14:23:02.466274', 'John Snow', '00889976654554', 'Block B, New Aurlington, Texas, USA');
+(5, 'pbkdf2_sha256$120000$uqkOQLVSzjJM$M3BVFrNhSwAjvj6xY0yHi88YZTWi/OGHnTiqBRq2lj0=', '2019-01-08 07:14:44.057094', 0, 'john.snow@gmail.com', '', '', '', 0, 1, '2019-01-07 14:23:02.466274', 'John Snow', '00889976654554', 'Block B, New Aurlington, Texas, USA'),
+(6, '12345678', NULL, 0, 'farhad@gmail.com', '', '', '', 0, 1, '2019-01-08 10:53:19.242245', 'Farhad Hassan', '09887887788', 'jkhasdf sadfj sdaljflsda fsd'),
+(7, 'pbkdf2_sha256$120000$LMng2f32DJYg$fnyzjviYx0LnT4BFsNbzJpX7aftByhtCSFsQPBDEKHU=', NULL, 0, 'sks@gmail.com', '', '', '', 0, 1, '2019-01-09 03:43:10.686206', 'SKS VLS', '9908877778989', 'lkasdjf sadklfj sadlkfjs dalfjsadk'),
+(8, 'superacces123', NULL, 0, 'nancy@gmail.com', '', '', '', 0, 1, '2019-01-09 04:58:34.206353', 'Nancy', '09887887788', ''),
+(9, 'superacces123', NULL, 0, 'ab@gmail.com', '', '', '', 0, 1, '2019-01-09 06:06:05.131026', 'AB de Villiars', '98879989990', ''),
+(10, 'superacces123', NULL, 0, 'fransisco@yahoo.co', '', '', '', 0, 1, '2019-01-09 06:10:25.733684', 'Fransisco DLS', '989897987', 'ljklasdjf asldkfj salkfjsadl fsaldjflsdjf'),
+(11, 'superacces123', NULL, 0, 'kelly@gmail.com', '', '', '', 0, 1, '2019-01-09 06:19:45.959993', 'Kelly Madisson', '2343534534635', 'USA'),
+(12, 'superacces123', NULL, 0, 'ira@bylc.org', '', '', '', 0, 1, '2019-01-09 06:24:06.226529', 'Tanzila Shawqat', '8999989988', 'Mirpur DOHS, Dhaka'),
+(13, 'superacces123', NULL, 0, 'zoha@bylc.org', '', '', '', 0, 1, '2019-01-09 09:22:38.423934', 'Zoha', '09090908', 'alkjfsa dfsaldkfsd'),
+(14, 'superacces123', NULL, 0, 'abir@bylc.org', '', '', '', 0, 1, '2019-01-09 10:58:06.853529', 'Abir', '09887887788', 'asdfsadfsadfsadf'),
+(15, 'superacces123', NULL, 0, 'sami@bylc.org', '', '', '', 0, 1, '2019-01-09 11:14:42.911203', 'Sami Khan', '+880187654341', 'Baridhara, Dhaka 1212');
 
 -- --------------------------------------------------------
 
@@ -251,6 +295,13 @@ CREATE TABLE `users_customuser_user_permissions` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `authtoken_token`
+--
+ALTER TABLE `authtoken_token`
+  ADD PRIMARY KEY (`key`),
+  ADD UNIQUE KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `auth_group`
@@ -343,7 +394,7 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `django_admin_log`
 --
@@ -353,17 +404,17 @@ ALTER TABLE `django_admin_log`
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `users_customuser`
 --
 ALTER TABLE `users_customuser`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `users_customuser_groups`
 --
@@ -377,6 +428,12 @@ ALTER TABLE `users_customuser_user_permissions`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `authtoken_token`
+--
+ALTER TABLE `authtoken_token`
+  ADD CONSTRAINT `authtoken_token_user_id_35299eff_fk_users_customuser_id` FOREIGN KEY (`user_id`) REFERENCES `users_customuser` (`id`);
 
 --
 -- Constraints for table `auth_group_permissions`
