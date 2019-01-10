@@ -12,3 +12,4 @@ class CustomUserAdmin(UserAdmin):
     list_display = ['username', 'full_name', 'mobile_number']
 
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.site_header = 'My administration'
