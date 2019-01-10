@@ -10,19 +10,65 @@
         <div class="col-lg-12">
           <h4>Login</h4>
           <hr/>
-          <form>
+          <form method="post">
+            {% csrf_token %}
+
             <div class="form-group">
-              <label for="InputEmail">Email address</label>
-              <input type="email" class="form-control" id="InputEmail" placeholder="Enter email">
+              <label for="InputEmail">Your Email</label>
+
+              {{ form.username }}
+
+              {% if form.username.errors %}
+
+              <div class="alert alert-danger" role="alert">
+
+                 <strong>Sorry!</strong> {{ form.username.errors }}
+
+              </div>
+
+              {% endif %}
             </div>
             <div class="form-group">
               <label for="InputPassword">Password</label>
-              <input type="password" class="form-control" id="InputPassword" placeholder="Password">
+
+              {{ form.password }}
+
+              {% if form.password.errors %}
+
+              <div class="alert alert-danger" role="alert">
+
+                 <strong>Sorry!</strong> {{ form.password.errors }}
+
+              </div>
+
+              {% endif %}
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+
+            <input type="submit" class="btn btn-primary" value="Login">
+
           </form>
+
         </div>
       </div>
+
+
+      <div class="row marketing">
+        <div class="col-lg-12">
+
+            {% if login_errors %}
+
+              <div class="alert alert-danger" role="alert">
+
+                 <strong>Sorry!</strong> Email or Password is wrong
+
+              </div>
+
+            {% endif %}
+
+          </div>
+        </div>
+
+
       <div class="row marketing">
         <div class="col-lg-12">
           <p>Forgot your password? <a href="{% url 'forget-password-page' %}">Account Recovery</a></p>

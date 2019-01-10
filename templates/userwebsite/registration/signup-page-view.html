@@ -11,42 +11,6 @@
           <h4>Sign Up for a new account</h4>
           <hr/>
 
-          <!--form action="{% url 'users-create-view' %}" method="post">
-            {% csrf_token %}
-            <div class="form-group">
-              <label for="exampleInputName">Full Name</label>
-              <input type="text" name="full_name" class="form-control" id="exampleInputName" placeholder="Enter Your Full Name">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail">Email</label>
-              <input type="email" name="username" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter email">
-              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputNumber">Mobile Number</label>
-              <input type="text" name="mobile_number" class="form-control" id="exampleInputNumber" aria-describedby="numberHelp" placeholder="Enter Mobile Number">
-              <small id="numberHelp" class="form-text text-muted">Pleae use country code with your number like +8801XXXXXXXXX</small>
-            </div>
-            <div class="form-group">
-              <label for="exampleFormAddress">Address</label>
-              <textarea class="form-control" id="exampleFormAddress" rows="3" name="address"></textarea>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword">Password</label>
-              <input type="password" name="password" class="form-control" id="exampleInputPassword" placeholder="Password">
-              <small id="passwordHelp" class="form-text text-muted">Password must be at least 8 digits and must contain characters and numbers</small>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputConfirmPassword">Confirm Password</label>
-              <input type="password" name="confirm_password" class="form-control" id="exampleInputConfirmPassword" placeholder="Confirm Password">
-            </div>
-
-            <input type="submit" class="btn btn-primary" value="SignUp">
-          </form-->
-
-
-
-
           <form method="post">
             {% csrf_token %}
 

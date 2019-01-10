@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 09, 2019 at 11:15 AM
+-- Generation Time: Jan 10, 2019 at 10:20 AM
 -- Server version: 5.7.24-0ubuntu0.18.04.1
 -- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
@@ -38,7 +38,10 @@ CREATE TABLE `authtoken_token` (
 --
 
 INSERT INTO `authtoken_token` (`key`, `created`, `user_id`) VALUES
-('6940f4cd85945a1787b6f37a233c94f8f14ef2e1', '2019-01-08 07:14:44.049423', 5);
+('0c6de531a2602588fb1680e2f1be5768250d4872', '2019-01-10 05:45:11.897955', 1),
+('6940f4cd85945a1787b6f37a233c94f8f14ef2e1', '2019-01-08 07:14:44.049423', 5),
+('9fb749a63b9c4d2af5e2bb6e2735b480ffe9c182', '2019-01-10 08:49:01.193977', 17),
+('efa3c172a8024f7e2f7ec6abc07f12cd3f7042a0', '2019-01-10 08:56:34.193372', 18);
 
 -- --------------------------------------------------------
 
@@ -111,7 +114,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (25, 'Can add Token', 7, 'add_token'),
 (26, 'Can change Token', 7, 'change_token'),
 (27, 'Can delete Token', 7, 'delete_token'),
-(28, 'Can view Token', 7, 'view_token');
+(28, 'Can view Token', 7, 'view_token'),
+(29, 'Can add custom user token', 8, 'add_customusertoken'),
+(30, 'Can change custom user token', 8, 'change_customusertoken'),
+(31, 'Can delete custom user token', 8, 'delete_customusertoken'),
+(32, 'Can view custom user token', 8, 'view_customusertoken');
 
 -- --------------------------------------------------------
 
@@ -164,7 +171,8 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (7, 'authtoken', 'token'),
 (4, 'contenttypes', 'contenttype'),
 (5, 'sessions', 'session'),
-(6, 'users', 'customuser');
+(6, 'users', 'customuser'),
+(8, 'users', 'customusertoken');
 
 -- --------------------------------------------------------
 
@@ -202,7 +210,9 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (15, 'admin', '0003_logentry_add_action_flag_choices', '2019-01-07 13:20:27.668458'),
 (16, 'sessions', '0001_initial', '2019-01-07 13:20:28.311619'),
 (17, 'authtoken', '0001_initial', '2019-01-08 07:04:14.780047'),
-(18, 'authtoken', '0002_auto_20160226_1747', '2019-01-08 07:04:14.851006');
+(18, 'authtoken', '0002_auto_20160226_1747', '2019-01-08 07:04:14.851006'),
+(19, 'users', '0002_customusertoken', '2019-01-10 09:49:52.812352'),
+(20, 'users', '0003_auto_20190110_1607', '2019-01-10 10:16:36.882337');
 
 -- --------------------------------------------------------
 
@@ -222,7 +232,38 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('dkg1l3ikh95rhfk9181sujq6kfhcc584', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-22 07:14:44.102230');
+('11xh81fexrf9ueny2mzdbyrh4vlr38ac', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 07:11:46.642515'),
+('2db5wutzx1kbfr8cyymq380lmsblgj7z', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 05:11:21.036377'),
+('3179dzlbxztakr4s1tfr1culovzswc4s', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 07:12:47.474028'),
+('59m8a2yzgofxvtzy32ncotwc11m1kdu3', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 08:40:10.881823'),
+('5toiqsto0uwxjpz6olxah0loaqh36jc0', 'MGExMjAzY2EyYTY1YmQ0YTY2OTE5MWU3YjVkODAwZjgzM2E1N2M3ZTp7Il9hdXRoX3VzZXJfaWQiOiIxOCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZjhmNGFkMjFhZTBjMjIzMjQ5NGNiZGNkZmRlZjU0ODY0MTA1YTlkNSJ9', '2019-01-24 09:15:37.729287'),
+('9k5dmi7p69h74ixsludhgxh1b4biopek', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 05:51:14.840731'),
+('dk2dalzl0hgo98ufuwk45xtzcht0w1z8', 'ZGJiZGEwZGJmMDQ5MjZmNmM3MDhiZWJmNDczMzE1MjQ3MmY3ZDJhMDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlMTU5OTM0ZGZjN2MwMjQ5NTY3NmVkNWYxMzIyYjRlZmIyNWQ3ZDc3In0=', '2019-01-24 08:44:53.573586'),
+('ea7mxolqla8c4fcppscczkf40ktw3k4k', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 08:39:25.093853'),
+('epp41siq7mhbhgukkefalrm257j3g714', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 07:13:35.332752'),
+('fpxczybgff6m3voh8opzwezgq5muunwq', 'MGExMjAzY2EyYTY1YmQ0YTY2OTE5MWU3YjVkODAwZjgzM2E1N2M3ZTp7Il9hdXRoX3VzZXJfaWQiOiIxOCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZjhmNGFkMjFhZTBjMjIzMjQ5NGNiZGNkZmRlZjU0ODY0MTA1YTlkNSJ9', '2019-01-24 09:23:33.077780'),
+('fzbee21xlilnlkd77pl6b8g8fhz7xr6k', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 08:38:51.381234'),
+('gauog1ugc8jqhyqfcfcn0yygwyyfo0g6', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 08:37:47.545181'),
+('jaz4h9be9xojd9fdoq6vn4urnzg057ez', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 05:28:54.547384'),
+('lacojafjlmluetjox9s3ooh9k05la3t8', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 05:14:55.771048'),
+('lpje78kl5g483rsww43kosxknf02dqa6', 'MGExMjAzY2EyYTY1YmQ0YTY2OTE5MWU3YjVkODAwZjgzM2E1N2M3ZTp7Il9hdXRoX3VzZXJfaWQiOiIxOCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZjhmNGFkMjFhZTBjMjIzMjQ5NGNiZGNkZmRlZjU0ODY0MTA1YTlkNSJ9', '2019-01-24 09:09:38.614649'),
+('ltfilaw8k1o15ustuotfii7o4psn6kzi', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 07:12:14.239930'),
+('n13x2189axwjid2xwaar4lt15sof9izv', 'MGExMjAzY2EyYTY1YmQ0YTY2OTE5MWU3YjVkODAwZjgzM2E1N2M3ZTp7Il9hdXRoX3VzZXJfaWQiOiIxOCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZjhmNGFkMjFhZTBjMjIzMjQ5NGNiZGNkZmRlZjU0ODY0MTA1YTlkNSJ9', '2019-01-24 08:57:15.235444'),
+('nrj8zdto5aedvtwnd73vlaodmj3571be', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 05:02:32.240088'),
+('q84hwl1nn5hm2zr55fc6lr2oqu9dr3ef', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 05:34:36.103951'),
+('r6mnrnf4re3lqno4qi9pz5bu34k4g2uz', 'MGExMjAzY2EyYTY1YmQ0YTY2OTE5MWU3YjVkODAwZjgzM2E1N2M3ZTp7Il9hdXRoX3VzZXJfaWQiOiIxOCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZjhmNGFkMjFhZTBjMjIzMjQ5NGNiZGNkZmRlZjU0ODY0MTA1YTlkNSJ9', '2019-01-24 09:09:57.467635'),
+('tyyw2y03jnykgxb1ddmhcxm409i3u71v', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 05:41:24.579932'),
+('u4o8jybjpdklfiz0i7fiumqrg4hisgxw', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 06:57:36.468567'),
+('v4gydlx7fnurednvy0qt7cyq4k5u8gaz', 'MGExMjAzY2EyYTY1YmQ0YTY2OTE5MWU3YjVkODAwZjgzM2E1N2M3ZTp7Il9hdXRoX3VzZXJfaWQiOiIxOCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZjhmNGFkMjFhZTBjMjIzMjQ5NGNiZGNkZmRlZjU0ODY0MTA1YTlkNSJ9', '2019-01-24 09:03:55.845401'),
+('w4pj8fnrdzx2plm9fqqpu9cqm181qzt1', 'MGExMjAzY2EyYTY1YmQ0YTY2OTE5MWU3YjVkODAwZjgzM2E1N2M3ZTp7Il9hdXRoX3VzZXJfaWQiOiIxOCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZjhmNGFkMjFhZTBjMjIzMjQ5NGNiZGNkZmRlZjU0ODY0MTA1YTlkNSJ9', '2019-01-24 10:03:19.812104'),
+('waj6hki4ocmmypfwxwre6u23m7qyskqq', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 05:10:33.390825'),
+('wcq54ftyobxhdl9u32rapawrur5r49ja', 'MGExMjAzY2EyYTY1YmQ0YTY2OTE5MWU3YjVkODAwZjgzM2E1N2M3ZTp7Il9hdXRoX3VzZXJfaWQiOiIxOCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZjhmNGFkMjFhZTBjMjIzMjQ5NGNiZGNkZmRlZjU0ODY0MTA1YTlkNSJ9', '2019-01-24 09:24:05.344001'),
+('wj0xz2rozivac32bekyf3zrqyow4rake', 'MGExMjAzY2EyYTY1YmQ0YTY2OTE5MWU3YjVkODAwZjgzM2E1N2M3ZTp7Il9hdXRoX3VzZXJfaWQiOiIxOCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZjhmNGFkMjFhZTBjMjIzMjQ5NGNiZGNkZmRlZjU0ODY0MTA1YTlkNSJ9', '2019-01-24 09:23:22.055149'),
+('wjsj9yi0lnk9pbiq4wvj66tkfjyq1r4m', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 08:38:06.410741'),
+('xge2zn3k4uiq1vw7sc56zpbtgv1zna7w', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 07:14:11.347592'),
+('ydgx1f2iaywpyzqhnd2lz2k7lb2twdyq', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 05:13:42.047212'),
+('zf6sa5m0oudtxupeddm8wx4bnvzfjsiq', 'MGExMjAzY2EyYTY1YmQ0YTY2OTE5MWU3YjVkODAwZjgzM2E1N2M3ZTp7Il9hdXRoX3VzZXJfaWQiOiIxOCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZjhmNGFkMjFhZTBjMjIzMjQ5NGNiZGNkZmRlZjU0ODY0MTA1YTlkNSJ9', '2019-01-24 09:16:20.657370'),
+('zpkwivyayrmgcyhjhndo2yxr2ipal18m', 'Zjg3ZjY5YTllNmJjNjViN2RkZjk4MjMzYzdiZDkwNWVhZjUwNGZlMjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkYzhhMjVkZWI3OTA5MTZhMmI3MWQ4MzI5OGM1MGQ4ODBiMzAzNTkyIn0=', '2019-01-24 06:55:50.104296');
 
 -- --------------------------------------------------------
 
@@ -253,8 +294,8 @@ CREATE TABLE `users_customuser` (
 --
 
 INSERT INTO `users_customuser` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`, `full_name`, `mobile_number`, `address`) VALUES
-(1, 'pbkdf2_sha256$120000$zHGDIwu1f7ly$nMRhNLBQs1Q/avzuYDN5d+2lWOQlegCXHFLyHpqOj6g=', '2019-01-07 14:23:45.723401', 1, 'root', '', '', 'root@idopia.co', 1, 1, '2019-01-07 13:34:13.516999', '', '', ''),
-(5, 'pbkdf2_sha256$120000$uqkOQLVSzjJM$M3BVFrNhSwAjvj6xY0yHi88YZTWi/OGHnTiqBRq2lj0=', '2019-01-08 07:14:44.057094', 0, 'john.snow@gmail.com', '', '', '', 0, 1, '2019-01-07 14:23:02.466274', 'John Snow', '00889976654554', 'Block B, New Aurlington, Texas, USA'),
+(1, 'pbkdf2_sha256$120000$zHGDIwu1f7ly$nMRhNLBQs1Q/avzuYDN5d+2lWOQlegCXHFLyHpqOj6g=', '2019-01-10 08:44:53.529562', 1, 'root', '', '', 'root@idopia.co', 1, 1, '2019-01-07 13:34:13.516999', '', '', ''),
+(5, 'pbkdf2_sha256$120000$uqkOQLVSzjJM$M3BVFrNhSwAjvj6xY0yHi88YZTWi/OGHnTiqBRq2lj0=', '2019-01-10 08:40:10.876236', 0, 'john.snow@gmail.com', '', '', '', 0, 1, '2019-01-07 14:23:02.466274', 'John Snow', '00889976654554', 'Block B, New Aurlington, Texas, USA'),
 (6, '12345678', NULL, 0, 'farhad@gmail.com', '', '', '', 0, 1, '2019-01-08 10:53:19.242245', 'Farhad Hassan', '09887887788', 'jkhasdf sadfj sdaljflsda fsd'),
 (7, 'pbkdf2_sha256$120000$LMng2f32DJYg$fnyzjviYx0LnT4BFsNbzJpX7aftByhtCSFsQPBDEKHU=', NULL, 0, 'sks@gmail.com', '', '', '', 0, 1, '2019-01-09 03:43:10.686206', 'SKS VLS', '9908877778989', 'lkasdjf sadklfj sadlkfjs dalfjsadk'),
 (8, 'superacces123', NULL, 0, 'nancy@gmail.com', '', '', '', 0, 1, '2019-01-09 04:58:34.206353', 'Nancy', '09887887788', ''),
@@ -264,7 +305,10 @@ INSERT INTO `users_customuser` (`id`, `password`, `last_login`, `is_superuser`, 
 (12, 'superacces123', NULL, 0, 'ira@bylc.org', '', '', '', 0, 1, '2019-01-09 06:24:06.226529', 'Tanzila Shawqat', '8999989988', 'Mirpur DOHS, Dhaka'),
 (13, 'superacces123', NULL, 0, 'zoha@bylc.org', '', '', '', 0, 1, '2019-01-09 09:22:38.423934', 'Zoha', '09090908', 'alkjfsa dfsaldkfsd'),
 (14, 'superacces123', NULL, 0, 'abir@bylc.org', '', '', '', 0, 1, '2019-01-09 10:58:06.853529', 'Abir', '09887887788', 'asdfsadfsadfsadf'),
-(15, 'superacces123', NULL, 0, 'sami@bylc.org', '', '', '', 0, 1, '2019-01-09 11:14:42.911203', 'Sami Khan', '+880187654341', 'Baridhara, Dhaka 1212');
+(15, 'superacces123', NULL, 0, 'sami@bylc.org', '', '', '', 0, 1, '2019-01-09 11:14:42.911203', 'Sami Khan', '+880187654341', 'Baridhara, Dhaka 1212'),
+(16, 'superacces123', NULL, 0, 'isko@gmail.com', '', '', '', 0, 1, '2019-01-10 08:45:47.271358', 'Vincent Isko', '0909808098', 'Barcelona, Spain'),
+(17, 'superacces123', NULL, 0, 'joakim@gmail.com', '', '', '', 0, 1, '2019-01-10 08:49:00.854554', 'Joakim Lo', '44534333455', 'Berlin, Germany'),
+(18, 'pbkdf2_sha256$120000$BgvF9Tury5lb$IYaNlxoEWvEMSOPReYPxa2YMxSxYAEG7RIr4b+eIoaI=', '2019-01-10 10:03:19.800451', 0, 'stefan@gmail.com', '', '', '', 0, 1, '2019-01-10 08:56:34.162744', 'Stefan Aloneso', '988998889', 'London, England');
 
 -- --------------------------------------------------------
 
@@ -394,7 +438,7 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `django_admin_log`
 --
@@ -404,17 +448,17 @@ ALTER TABLE `django_admin_log`
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `users_customuser`
 --
 ALTER TABLE `users_customuser`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `users_customuser_groups`
 --
